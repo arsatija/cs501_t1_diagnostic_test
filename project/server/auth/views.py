@@ -8,21 +8,23 @@ from project.server.models import User
 
 auth_blueprint = Blueprint('auth', __name__)
 
+
 class RegisterAPI(MethodView):
     """
     User Registration Resource
     """
 
     def get(self):
-    	responseObject = {
-    		'status': 'success',
-    		'message': 'Request successful but please send an HTTP POST request to register the user.'
-    	}
-    	return make_response(jsonify(responseObject)), 201
+        responseObject = {
+            'status': 'success',
+            'message': 'Request successful but please send an HTTP POST request to register the user.'
+        }
+        return make_response(jsonify(responseObject)), 201
 
     def post(self):
         # get the post data
-        post_data = request.get_json(); print(request)
+        post_data = request.get_json()
+        print(request)
         # check if user already exists
         user = User.query.filter_by(email=post_data.get('email')).first()
         if not user:
@@ -66,3 +68,9 @@ auth_blueprint.add_url_rule(
     view_func=registration_view,
     methods=['POST', 'GET']
 )
+
+
+@auth_blueprint.route('/users/index')
+def getUserList():
+    userList = User.getUsers()
+    return str(userList)
