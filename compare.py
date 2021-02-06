@@ -9,3 +9,4 @@ delta = ''.join([x for x in diff if x.startswith('-')])
 print(delta)
 
 # psycopg2==2.8.4
+# cffi==1.9.1
