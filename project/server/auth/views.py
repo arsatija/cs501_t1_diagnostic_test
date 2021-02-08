@@ -73,4 +73,4 @@ auth_blueprint.add_url_rule(
 @auth_blueprint.route('/users/index')
 def getUserList():
     userList = User.getUsers()
-    return str(userList)
+    return jsonify(userList)
